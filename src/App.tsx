@@ -982,15 +982,7 @@ export default function App() {
   return (
     <div style={{ fontFamily: 'Work Sans, sans-serif', backgroundColor: '#F7F2E9', minHeight: '100vh' }}>
 
-      {/* ── ANNOUNCEMENT BAR ────────────────────── */}
-      <div
-        className="w-full text-center py-2.5 px-4 text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-center gap-2 border-b border-[#3A5C3E]/10"
-        style={{ backgroundColor: '#3A5C3E', color: '#F7F2E9' }}
-      >
-        <span>🇮🇳</span> Handcrafted with care in India
-        <span className="opacity-50">•</span>
-        <span>100% Natural Botanicals</span>
-      </div>
+
 
       {/* ── NAV ───────────────────────────────────── */}
       <header
