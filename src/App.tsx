@@ -609,7 +609,7 @@ function ReviewsSection() {
   }
 
   return (
-    <section id="reviews" className="py-16 sm:py-20" style={{ backgroundColor: '#F0EAE0' }}>
+    <section id="reviews" className="py-10 sm:py-14" style={{ backgroundColor: '#F0EAE0' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           
@@ -842,9 +842,9 @@ function IngredientsSection() {
   const spotlight = getProductSpotlightDetails(activeProduct.id)
 
   return (
-    <section id="ingredients" className="py-16 sm:py-20">
+    <section id="ingredients" className="py-10 sm:py-14">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <p className="text-xs tracking-[0.22em] uppercase font-semibold mb-3" style={{ color: '#8FAF7E' }}>What's Inside</p>
           <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.7rem, 5vw, 2.6rem)', fontWeight: 700, color: '#2C1E12' }}>
             Ingredients That Actually Work
@@ -855,7 +855,7 @@ function IngredientsSection() {
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <div className="flex gap-8 border-b border-[#E0D8CC] pb-2 max-w-lg w-full justify-center">
             {PRODUCTS.map(p => {
               const isActive = activeTab === p.id
@@ -1093,7 +1093,7 @@ export default function App() {
               'radial-gradient(ellipse at 15% 60%, rgba(143,175,126,0.16) 0%, transparent 55%), radial-gradient(ellipse at 85% 20%, rgba(200,169,126,0.14) 0%, transparent 50%)',
           }}
         />
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-14 sm:pt-16 sm:pb-20">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-8 pb-10 sm:pt-12 sm:pb-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
             {/* copy */}
             <div className="flex flex-col gap-5 text-center sm:text-left order-2 sm:order-1">
@@ -1206,9 +1206,9 @@ export default function App() {
       </section>
 
       {/* ── PRODUCTS ──────────────────────────────── */}
-      <section id="products" className="py-16 sm:py-20" style={{ backgroundColor: '#F0EAE0' }}>
+      <section id="products" className="py-10 sm:py-14" style={{ backgroundColor: '#F0EAE0' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <p className="text-xs tracking-[0.22em] uppercase font-semibold mb-3" style={{ color: '#8FAF7E' }}>Our Collection</p>
             <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.7rem, 5vw, 2.6rem)', fontWeight: 700, color: '#2C1E12' }}>
               Three Soaps. One Mission.
@@ -1230,9 +1230,9 @@ export default function App() {
       <IngredientsSection />
 
       {/* ── PRICING TABLE (BALANCED HEIGHTS) ─────────── */}
-      <section className="py-16 sm:py-20" style={{ backgroundColor: '#F0EAE0' }}>
+      <section className="py-10 sm:py-14" style={{ backgroundColor: '#F0EAE0' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <p className="text-xs tracking-[0.22em] uppercase font-semibold mb-3" style={{ color: '#8FAF7E' }}>Transparent Pricing</p>
             <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.7rem, 5vw, 2.6rem)', fontWeight: 700, color: '#2C1E12' }}>
               Premium Botanicals,<br />
@@ -1332,7 +1332,7 @@ export default function App() {
       </section>
 
       {/* ── BENEFITS WITH PREMIUM ICONS ──────────────── */}
-      <section id="benefits" className="py-16 sm:py-20">
+      <section id="benefits" className="py-10 sm:py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
             <div>
@@ -1390,7 +1390,7 @@ export default function App() {
       <ReviewsSection />
 
       {/* ── ABOUT ─────────────────────────────────── */}
-      <section id="about" className="py-16 sm:py-20" style={{ backgroundColor: '#3A5C3E' }}>
+      <section id="about" className="py-10 sm:py-14" style={{ backgroundColor: '#3A5C3E' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
             {/* image grid */}
@@ -1432,7 +1432,7 @@ export default function App() {
       </section>
 
       {/* ── DIRECT ORDERS & CONTACT DETAILS ─────────── */}
-      <section className="py-16 sm:py-20" style={{ backgroundColor: '#FBF8F2' }}>
+      <section className="py-10 sm:py-14" style={{ backgroundColor: '#FBF8F2' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
