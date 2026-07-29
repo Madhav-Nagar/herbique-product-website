@@ -477,28 +477,23 @@ function ProductModal({ product, onClose }: { product: (typeof PRODUCTS)[0]; onC
               ))}
             </div>
           </div>
-
-          {/* ingredients */}
-          <div>
-            <h3 className="text-xs font-semibold tracking-[0.18em] uppercase mb-3" style={{ color: '#7A6A58' }}>
-              🌿 Key Actives & Benefits
+          {/* ingredients (compact list) */}
+          <div className="border-t border-[#E0D8CC]/50 pt-4">
+            <h3 className="text-xs font-bold tracking-[0.18em] uppercase mb-3.5" style={{ color: '#7A6A58' }}>
+              🌿 Key Actives & Formulation
             </h3>
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-4">
               {product.ingredients.map((ing, i) => (
                 <div
                   key={i}
-                  className="flex gap-3 p-3 rounded-xl transition-all hover:bg-white/50"
-                  style={{ backgroundColor: product.accentBg, border: `1px solid ${product.accentColor}1A` }}
+                  className="flex gap-3.5 items-start group"
                 >
-                  <div
-                    className="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold"
-                    style={{ backgroundColor: product.accentColor, color: '#FBF8F2', marginTop: '1px' }}
-                  >
-                    {i + 1}
-                  </div>
+                  <span className="text-xs font-serif italic text-[#8A7A68] mt-0.5 font-bold">
+                    0{i + 1}
+                  </span>
                   <div>
-                    <p className="text-sm font-semibold mb-0.5" style={{ color: '#2C1E12' }}>{ing.name}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#5A4A38' }}>{ing.benefit}</p>
+                    <p className="text-xs font-bold" style={{ color: '#2C1E12' }}>{ing.name}</p>
+                    <p className="text-[11px] leading-relaxed text-[#5A4A38] mt-0.5 font-light">{ing.benefit}</p>
                   </div>
                 </div>
               ))}
