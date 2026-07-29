@@ -882,70 +882,68 @@ function IngredientsSection() {
 
         {/* Spotlight Showcase Grid */}
         <div
-          className="rounded-3xl overflow-hidden flex flex-col md:flex-row gap-0 border shadow-lg transition-all duration-500"
-          style={{ borderColor: '#E0D8CC', backgroundColor: '#FBF8F2' }}
+          className="rounded-3xl overflow-hidden flex flex-col md:flex-row gap-0 border shadow-lg transition-all duration-500 bg-white"
+          style={{ borderColor: '#E0D8CC' }}
         >
-          {/* Left Column: Soap Spotlight Card */}
-          <div
-            className="w-full md:w-[40%] p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r relative overflow-hidden"
-            style={{ borderColor: '#E0D8CC', background: '#F8F3EA' }}
-          >
-            {/* Subtle background wash */}
-            <div className="absolute inset-0 pointer-events-none opacity-20" style={{ background: activeProduct.gradient }} />
-            
-            <div className="relative z-10">
-              <span
-                className="text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md inline-block border"
-                style={{ borderColor: `${activeProduct.accentColor}33`, color: activeProduct.accentColor, backgroundColor: `${activeProduct.accentColor}0A` }}
-              >
-                {activeProduct.tagline}
-              </span>
-              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', fontWeight: 700, color: '#2C1E12' }} className="mt-4 leading-tight">
-                {activeProduct.name}
-              </h3>
-              <p className="text-xs text-[#5A4A38] mt-3 leading-relaxed font-light">
-                {activeProduct.description}
-              </p>
-            </div>
-
-            {/* Product Image Frame with Luxury Offset Drop Shadow */}
-            <div className="my-8 relative z-10 px-4">
-              <div className="absolute inset-0 bg-[#3A5C3E]/5 rounded-2xl transform rotate-2 translate-x-2 translate-y-1" />
-              <div className="rounded-2xl overflow-hidden border border-[#D9D0C0] shadow-md h-44 relative bg-white">
-                <img src={activeProduct.heroImg} alt={activeProduct.name} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-              </div>
-            </div>
-
-            {/* Quick specifications */}
-            <div className="flex flex-col gap-3.5 border-t border-[#E0D8CC] pt-5 relative z-10">
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] tracking-wider text-[#8A7A68] uppercase font-semibold">SKIN COMPATIBILITY</span>
-                <span className="text-xs text-[#2C1E12] font-semibold">{spotlight.skinType}</span>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] tracking-wider text-[#8A7A68] uppercase font-semibold">PRIMARY TARGET CONCERN</span>
-                <span className="text-xs text-[#2C1E12] font-semibold">{spotlight.concern}</span>
-              </div>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-[9px] tracking-wider text-[#8A7A68] uppercase font-semibold">AROMATIC PROFILE</span>
-                <span className="text-xs text-[#2C1E12] font-semibold">{spotlight.aroma}</span>
-              </div>
-            </div>
+          {/* Left Column: Soap Full-Bleed Cover Image */}
+          <div className="w-full md:w-[35%] lg:w-[38%] h-64 md:h-auto relative overflow-hidden flex-shrink-0 bg-[#F8F3EA]">
+            <img src={activeProduct.heroImg} alt={activeProduct.name} className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent md:hidden" />
+            {/* Tagline badge floating on image for mobile view */}
+            <span
+              className="absolute bottom-4 left-4 text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md inline-block border bg-white/90 backdrop-blur-sm md:hidden"
+              style={{ borderColor: `${activeProduct.accentColor}33`, color: activeProduct.accentColor }}
+            >
+              {activeProduct.tagline}
+            </span>
           </div>
 
-          {/* Right Column: Ingredients List */}
-          <div className="w-full md:w-[60%] p-8 md:p-10 flex flex-col justify-between bg-white">
+          {/* Right Column: Content Details */}
+          <div className="w-full md:w-[65%] lg:w-[62%] p-6 sm:p-8 md:p-10 flex flex-col justify-between" style={{ backgroundColor: '#FBF8F2' }}>
             <div>
-              <div className="flex justify-between items-center mb-8 pb-3 border-b border-[#F0EAE0]">
-                <h4 className="text-xs font-bold text-[#7A6A58] uppercase tracking-[0.18em]">
-                  Active Botanical Ingredients
-                </h4>
-                <span className="text-[10px] tracking-widest text-[#8A7A68] font-mono">
+              <div className="flex justify-between items-start gap-4">
+                <div>
+                  <span
+                    className="hidden md:inline-block text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-md border"
+                    style={{ borderColor: `${activeProduct.accentColor}33`, color: activeProduct.accentColor, backgroundColor: `${activeProduct.accentColor}0A` }}
+                  >
+                    {activeProduct.tagline}
+                  </span>
+                  <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', fontWeight: 700, color: '#2C1E12' }} className="mt-3 leading-tight">
+                    {activeProduct.name}
+                  </h3>
+                </div>
+                <span className="text-[10px] tracking-widest text-[#8A7A68] font-mono mt-2 bg-[#EDE8DF] px-2.5 py-1 rounded border border-[#E0D8CC]/50">
                   FORMULA: {activeProduct.id === 'glutathione' ? 'HERB-GL-01' : activeProduct.id === 'redvelvet' ? 'HERB-RV-02' : 'HERB-NM-03'}
                 </span>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+              <p className="text-xs text-[#5A4A38] mt-3 leading-relaxed font-light font-sans">
+                {activeProduct.description}
+              </p>
+
+              {/* Specs horizontal bar */}
+              <div className="grid grid-cols-3 gap-2 border-y border-[#E0D8CC]/60 py-4 my-6">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[8px] tracking-wider text-[#8A7A68] uppercase font-bold">COMPATIBILITY</span>
+                  <span className="text-[11px] text-[#2C1E12] font-semibold leading-tight">{spotlight.skinType}</span>
+                </div>
+                <div className="flex flex-col gap-0.5 border-x border-[#E0D8CC]/40 px-3">
+                  <span className="text-[8px] tracking-wider text-[#8A7A68] uppercase font-bold">PRIMARY TARGET</span>
+                  <span className="text-[11px] text-[#2C1E12] font-semibold leading-tight">{spotlight.concern}</span>
+                </div>
+                <div className="flex flex-col gap-0.5 pl-1">
+                  <span className="text-[8px] tracking-wider text-[#8A7A68] uppercase font-bold">AROMA PROFILE</span>
+                  <span className="text-[11px] text-[#2C1E12] font-semibold leading-tight">{spotlight.aroma}</span>
+                </div>
+              </div>
+
+              {/* Active Botanical Ingredients list */}
+              <h4 className="text-xs font-bold text-[#7A6A58] uppercase tracking-[0.18em] mb-4">
+                Active Botanical Ingredients
+              </h4>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
                 {activeProduct.ingredients.map((ing, i) => (
                   <div
                     key={i}
@@ -955,14 +953,9 @@ function IngredientsSection() {
                       0{i + 1}
                     </span>
                     <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <h5 className="font-bold text-sm text-[#2C1E12] transition-colors group-hover:text-[#3A5C3E]">
-                          {ing.name}
-                        </h5>
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          {getIngredientIcon(ing.name, activeProduct.accentColor)}
-                        </span>
-                      </div>
+                      <h5 className="font-bold text-sm text-[#2C1E12] transition-colors group-hover:text-[#3A5C3E]">
+                        {ing.name}
+                      </h5>
                       <p className="text-[11px] leading-relaxed text-[#5A4A38] mt-1 font-light">
                         {ing.benefit}
                       </p>
@@ -972,7 +965,7 @@ function IngredientsSection() {
               </div>
             </div>
             
-            <div className="mt-8 pt-5 border-t border-[#F0EAE0] flex justify-between items-center text-[9px] text-[#8A7A68] tracking-[0.15em] uppercase font-semibold">
+            <div className="mt-8 pt-5 border-t border-[#E0D8CC]/50 flex justify-between items-center text-[9px] text-[#8A7A68] tracking-[0.15em] uppercase font-semibold">
               <span>BIODEGRADABLE</span>
               <span>•</span>
               <span>DERMATOLOGICALLY TESTED</span>
