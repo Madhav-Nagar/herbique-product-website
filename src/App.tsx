@@ -1492,26 +1492,15 @@ export default function App() {
                   Order Seamlessly<br />in 3 Simple Steps
                 </h3>
                 
-                {/* Prominent High-Visibility Value Highlights with SVGs instead of emojis */}
+                {/* Prominent High-Visibility Value Highlights */}
                 <div className="mt-4 flex flex-col gap-2.5">
-                  <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10 shadow-sm transition-all hover:bg-white/15 hover:translate-x-1 duration-300">
-                    <svg className="w-5 h-5 text-[#C8A97E] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    <div>
-                      <p className="font-semibold text-xs leading-none">Fast Dispatch India-wide</p>
-                      <p className="text-[10px] text-[#C8D8C2] mt-1.5 leading-none">Orders shipped within 24-48 hours</p>
-                    </div>
+                  <div className="bg-white/10 p-3.5 rounded-xl border border-white/10 shadow-sm transition-all hover:bg-white/15 hover:translate-x-1 duration-300">
+                    <p className="font-semibold text-xs leading-none text-[#F7F2E9]">Fast Dispatch India-wide</p>
+                    <p className="text-[10px] text-[#C8D8C2] mt-1.5 leading-none font-light">Orders shipped within 24-48 hours</p>
                   </div>
-                  <div className="flex items-center gap-3 bg-white/10 p-3 rounded-xl border border-white/10 shadow-sm transition-all hover:bg-white/15 hover:translate-x-1 duration-300">
-                    <svg className="w-5 h-5 text-[#C8A97E] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <rect x="3" y="5" width="18" height="14" rx="2" />
-                      <line x1="3" y1="10" x2="21" y2="10" />
-                    </svg>
-                    <div>
-                      <p className="font-semibold text-xs leading-none">UPI & Bank Transfer Accepted</p>
-                      <p className="text-[10px] text-[#C8D8C2] mt-1.5 leading-none">Safe payment details provided on checkout</p>
-                    </div>
+                  <div className="bg-white/10 p-3.5 rounded-xl border border-white/10 shadow-sm transition-all hover:bg-white/15 hover:translate-x-1 duration-300">
+                    <p className="font-semibold text-xs leading-none text-[#F7F2E9]">UPI & Bank Transfer Accepted</p>
+                    <p className="text-[10px] text-[#C8D8C2] mt-1.5 leading-none font-light">Safe payment details provided on checkout</p>
                   </div>
                 </div>
               </div>
