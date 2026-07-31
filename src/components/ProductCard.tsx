@@ -4,9 +4,11 @@ import glutTrialPieces from "@/imports/file_0000000044e882078ecb044e6917569a.web
 
 export default function ProductCard({
   product,
+  ratingInfo,
   onOpen,
 }: {
   product: Product
+  ratingInfo?: { avg: number; count: number }
   onOpen: (p: Product, initialSizeIndex?: number) => void
 }) {
   return (
@@ -151,7 +153,7 @@ export default function ProductCard({
               {product.id === "glutathione" && " (Best Value)"}
             </p>
           </div>
-          <StarRating />
+          <StarRating rating={ratingInfo?.avg} count={ratingInfo?.count} />
         </div>
 
         <button

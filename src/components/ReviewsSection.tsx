@@ -1,9 +1,22 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase"
 import { getDeviceId } from "@/lib/deviceId"
+import { PRODUCTS } from "@/data/products"
 import type { Review } from "@/types/review"
+import type { RatingsMap } from "@/App"
 
-export default function ReviewsSection() {
+const STAR_PATH =
+  "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+
+export default function ReviewsSection({
+  onReviewSubmitted,
+  ratingsMap = {},
+  ratingsLoaded = false,
+}: {
+  onReviewSubmitted?: () => void
+  ratingsMap?: RatingsMap
+  ratingsLoaded?: boolean
+}) {
   const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -81,6 +94,9 @@ export default function ReviewsSection() {
     if (data) setReviews((prev) => [data as Review, ...prev])
     setAlreadyReviewed(true)
 
+    // Notify parent to refresh ratings
+    onReviewSubmitted?.()
+
     // Reset form fields
     setName("")
     setComment("")
@@ -88,6 +104,7 @@ export default function ReviewsSection() {
     setSubmittedSuccess(true)
     setTimeout(() => setSubmittedSuccess(false), 5000)
   }
+
 
   return (
     <section
@@ -229,16 +246,107 @@ export default function ReviewsSection() {
             </form>
           </div>
 
-          {/* Right Column: Reviews List */}
-          <div className="md:col-span-2 flex flex-col">
-            <div className="mb-6 flex justify-between items-end">
-              <div>
-                <p
-                  className="text-xs tracking-[0.22em] uppercase font-semibold mb-2"
-                  style={{ color: "#8FAF7E" }}
-                >
-                  Customer Voice
-                </p>
+          {/* Right Column: Per-Soap Summaries + Reviews List */}
+          <div className="md:col-span-2 flex flex-col gap-6">
+
+            {/* ── Per-Soap Average Rating Cards ── */}
+            <div>
+              <p
+                className="text-xs tracking-[0.22em] uppercase font-semibold mb-3"
+                style={{ color: "#8FAF7E" }}
+              >
+                Customer Voice
+              </p>
+              <div className="grid grid-cols-3 gap-3">
+                {PRODUCTS.map((p) => {
+                  const info = ratingsLoaded
+                    ? (ratingsMap[p.name] ?? { avg: 0, count: 0 })
+                    : null
+                  const filledStars = info && info.count > 0 ? Math.round(info.avg) : 0
+
+                  return (
+                    <div
+                      key={p.id}
+                      className="flex flex-col items-center text-center p-3 sm:p-4 rounded-2xl border"
+                      style={{
+                        backgroundColor: "#FBF8F2",
+                        borderColor: "#E0D8CC",
+                      }}
+                    >
+                      {/* Soap label */}
+                      <p
+                        className="text-[10px] font-bold uppercase tracking-widest leading-tight"
+                        style={{ color: p.accentColor }}
+                      >
+                        {p.name.replace(" Soap", "")}
+                      </p>
+                      <p
+                        className="text-[9px] uppercase tracking-wider mb-2 mt-0.5"
+                        style={{ color: "#8A7A68" }}
+                      >
+                        Soap
+                      </p>
+
+                      {/* Stars */}
+                      {info === null ? (
+                        <div className="flex gap-0.5 mb-1">
+                          {[1, 2, 3, 4, 5].map((s) => (
+                            <div
+                              key={s}
+                              className="w-2.5 h-2.5 rounded-sm bg-[#E0D8CC] animate-pulse"
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex gap-0.5 mb-1">
+                          {[1, 2, 3, 4, 5].map((s) => (
+                            <svg
+                              key={s}
+                              className={`w-2.5 h-2.5 fill-current ${
+                                s <= filledStars
+                                  ? "text-yellow-400"
+                                  : "text-[#D9D0C0]"
+                              }`}
+                              viewBox="0 0 20 20"
+                            >
+                              <path d={STAR_PATH} />
+                            </svg>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Score + count */}
+                      {info === null ? (
+                        <div className="w-12 h-3 bg-[#E0D8CC] rounded animate-pulse mt-1" />
+                      ) : info.count > 0 ? (
+                        <>
+                          <p
+                            className="text-base font-bold leading-none"
+                            style={{
+                              fontFamily: "Playfair Display, serif",
+                              color: "#2C1E12",
+                            }}
+                          >
+                            {info.avg.toFixed(1)}
+                          </p>
+                          <p className="text-[9px] text-[#7A6A68] mt-0.5">
+                            {info.count} {info.count === 1 ? "review" : "reviews"}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-[9px] italic text-[#8A7A68] mt-1">
+                          No reviews yet
+                        </p>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* ── Reviews List ── */}
+            <div className="flex flex-col flex-1">
+              <div className="mb-4 flex justify-between items-center">
                 <h3
                   style={{
                     fontFamily: "Playfair Display, serif",
@@ -249,89 +357,87 @@ export default function ReviewsSection() {
                 >
                   Live Reviews
                 </h3>
+                <span className="text-xs font-semibold text-[#7A6A58] bg-[#EDE8DF] px-3 py-1.5 rounded-full border border-[#E0D8CC]">
+                  {loading ? "…" : `${reviews.length} ${reviews.length === 1 ? "Review" : "Reviews"}`}
+                </span>
               </div>
-              <span className="text-xs font-semibold text-[#7A6A58] bg-[#EDE8DF] px-3 py-1.5 rounded-full border border-[#E0D8CC]">
-                {loading ? "…" : `${reviews.length} ${reviews.length === 1 ? "Review" : "Reviews"}`}
-              </span>
-            </div>
 
-            {loading ? (
-              <div className="flex-1 flex flex-col gap-4">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="p-5 rounded-2xl bg-[#FBF8F2] border border-[#E0D8CC] animate-pulse">
-                    <div className="h-3 bg-[#E0D8CC] rounded w-1/3 mb-3" />
-                    <div className="h-2 bg-[#E0D8CC] rounded w-1/2 mb-4" />
-                    <div className="h-2 bg-[#E0D8CC] rounded w-full mb-2" />
-                    <div className="h-2 bg-[#E0D8CC] rounded w-3/4" />
-                  </div>
-                ))}
-              </div>
-            ) : reviews.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-[#FBF8F2] rounded-2xl border border-[#E0D8CC] border-dashed">
-                <span className="text-4xl mb-3">✍</span>
-                <h4 className="font-semibold text-[#2C1E12] text-sm">
-                  No reviews yet
-                </h4>
-                <p className="text-xs text-[#7A6A58] mt-1 max-w-xs leading-relaxed">
-                  Be the first to review one of our soaps and help others make the right choice!
-                </p>
-              </div>
-            ) : (
-              <div className="flex-1 overflow-y-auto max-h-[520px] flex flex-col gap-4 pr-1">
-                {reviews.map((r) => (
-                  <div
-                    key={r.id}
-                    className="p-5 rounded-2xl bg-[#FBF8F2] border border-[#E0D8CC] shadow-sm flex flex-col gap-3 transition-all hover:border-[#3A5C3E]/30"
-                  >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p
-                            className="font-semibold text-sm"
-                            style={{ color: "#2C1E12" }}
-                          >
-                            {r.name}
+              {loading ? (
+                <div className="flex-1 flex flex-col gap-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="p-5 rounded-2xl bg-[#FBF8F2] border border-[#E0D8CC] animate-pulse">
+                      <div className="h-3 bg-[#E0D8CC] rounded w-1/3 mb-3" />
+                      <div className="h-2 bg-[#E0D8CC] rounded w-1/2 mb-4" />
+                      <div className="h-2 bg-[#E0D8CC] rounded w-full mb-2" />
+                      <div className="h-2 bg-[#E0D8CC] rounded w-3/4" />
+                    </div>
+                  ))}
+                </div>
+              ) : reviews.length === 0 ? (
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-[#FBF8F2] rounded-2xl border border-[#E0D8CC] border-dashed">
+                  <span className="text-4xl mb-3">✍</span>
+                  <h4 className="font-semibold text-[#2C1E12] text-sm">No reviews yet</h4>
+                  <p className="text-xs text-[#7A6A58] mt-1 max-w-xs leading-relaxed">
+                    Be the first to review one of our soaps and help others make the right choice!
+                  </p>
+                </div>
+              ) : (
+                <div className="flex-1 overflow-y-auto max-h-[520px] flex flex-col gap-4 pr-1">
+                  {reviews.map((r) => (
+                    <div
+                      key={r.id}
+                      className="p-5 rounded-2xl bg-[#FBF8F2] border border-[#E0D8CC] shadow-sm flex flex-col gap-3 transition-all hover:border-[#3A5C3E]/30"
+                    >
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p
+                              className="font-semibold text-sm"
+                              style={{ color: "#2C1E12" }}
+                            >
+                              {r.name}
+                            </p>
+                            <span className="text-[10px] font-medium bg-[#EDE8DF] text-[#7A6A58] px-2 py-0.5 rounded-full flex items-center gap-1 border border-[#D9D0C0]">
+                              ✎ Customer Review
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-[#7A6A58] mt-0.5">
+                            Reviewed:{" "}
+                            <strong className="text-[#5A4A38]">
+                              {r.product_name}
+                            </strong>
                           </p>
-                          <span className="text-[10px] font-medium bg-[#EDE8DF] text-[#7A6A58] px-2 py-0.5 rounded-full flex items-center gap-1 border border-[#D9D0C0]">
-                            ✎ Customer Review
-                          </span>
                         </div>
-                        <p className="text-[11px] text-[#7A6A58] mt-0.5">
-                          Reviewed:{" "}
-                          <strong className="text-[#5A4A38]">
-                            {r.product_name}
-                          </strong>
+                        <p className="text-[10px] text-[#8A7A68]">
+                          {new Date(r.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                         </p>
                       </div>
-                      <p className="text-[10px] text-[#8A7A68]">
-                        {new Date(r.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <span
+                            key={star}
+                            style={{
+                              color: star <= r.rating ? "#C8A97E" : "#D9D0C0",
+                              fontSize: "13px",
+                            }}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+
+                      <p
+                        className="text-xs leading-relaxed"
+                        style={{ color: "#4A3C2C" }}
+                      >
+                        "{r.comment}"
                       </p>
                     </div>
-
-                    <div className="flex gap-0.5">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <span
-                          key={star}
-                          style={{
-                            color: star <= r.rating ? "#C8A97E" : "#D9D0C0",
-                            fontSize: "13px",
-                          }}
-                        >
-                          ★
-                        </span>
-                      ))}
-                    </div>
-
-                    <p
-                      className="text-xs leading-relaxed"
-                      style={{ color: "#4A3C2C" }}
-                    >
-                      "{r.comment}"
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
