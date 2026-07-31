@@ -1,4 +1,4 @@
-import glutHero from "@/imports/Gemini_Generated_Image_u4xtjeu4xtjeu4xt.webp";
+import glutHero from "@/imports/herbique_hero_main.webp";
 import glutTrialPieces from "@/imports/file_0000000044e882078ecb044e6917569a.webp";
 import neemHero from "@/imports/file_0000000039f081fabcc14b64b723cfbd.webp";
 

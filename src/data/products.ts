@@ -1,6 +1,6 @@
 // ── Glutathione images
-import glutHero from "@/imports/Gemini_Generated_Image_u4xtjeu4xtjeu4xt.webp"
-import glutAlt from "@/imports/Gemini_Generated_Image_htpltdhtpltdhtpl.webp"
+import glutHero from "@/imports/herbique_hero_main.webp"
+import glutAlt from "@/imports/herbique_glow_natural.webp"
 import glutTrialCups from "@/imports/file_00000000c97081fb8f438756845257b2.webp"
 import glutTrialPieces from "@/imports/file_0000000044e882078ecb044e6917569a.webp"
 

@@ -1,4 +1,4 @@
-import glutAlt from "@/imports/Gemini_Generated_Image_htpltdhtpltdhtpl.webp";
+import glutAlt from "@/imports/herbique_glow_natural.webp";
 import redWrapped from "@/imports/file_0000000006b481faba42405e2267de13.webp";
 import neemWrapped from "@/imports/file_0000000020d882308a477d88377da537.webp";
 
