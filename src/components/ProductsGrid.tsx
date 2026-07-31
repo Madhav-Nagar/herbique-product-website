@@ -1,16 +1,43 @@
+import { useState, useEffect } from "react";
 import { PRODUCTS, Product } from "@/data/products";
+import { supabase } from "@/lib/supabase";
 import ProductCard from "@/components/ProductCard";
-import type { RatingsMap } from "@/App";
+
+type RatingInfo = { avg: number; count: number };
+type RatingsMap = Record<string, RatingInfo>;
 
 export default function ProductsGrid({
   onOpenProduct,
-  ratingsMap,
-  ratingsLoaded,
 }: {
   onOpenProduct: (product: Product, sizeIndex?: number) => void;
-  ratingsMap: RatingsMap;
-  ratingsLoaded: boolean;
 }) {
+  const [ratingsMap, setRatingsMap] = useState<RatingsMap>({});
+  const [ratingsLoaded, setRatingsLoaded] = useState(false);
+
+  useEffect(() => {
+    supabase
+      .from("reviews")
+      .select("product_name, rating")
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          const grouped: Record<string, number[]> = {};
+          data.forEach((r) => {
+            if (!grouped[r.product_name]) grouped[r.product_name] = [];
+            grouped[r.product_name].push(r.rating);
+          });
+          const map: RatingsMap = {};
+          for (const [name, arr] of Object.entries(grouped)) {
+            map[name] = {
+              avg: arr.reduce((a, b) => a + b, 0) / arr.length,
+              count: arr.length,
+            };
+          }
+          setRatingsMap(map);
+        }
+        setRatingsLoaded(true);
+      });
+  }, []);
+
   return (
     <section
       id="products"
@@ -46,10 +73,6 @@ export default function ProductsGrid({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {PRODUCTS.map((p) => {
-            // Resolve this product's rating:
-            //  - ratingsLoaded=false → undefined (still loading, card shows gold 5★)
-            //  - ratingsLoaded=true, no entry → { avg:0, count:0 } ("No reviews yet")
-            //  - ratingsLoaded=true, has entry → actual avg + count
             const ratingInfo = ratingsLoaded
               ? (ratingsMap[p.name] ?? { avg: 0, count: 0 })
               : undefined;

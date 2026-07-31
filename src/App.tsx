@@ -77,8 +77,6 @@ export default function App() {
       <FadeIn delay={100}>
         <ProductsGrid
           onOpenProduct={handleOpenProduct}
-          ratingsMap={ratingsMap}
-          ratingsLoaded={ratingsLoaded}
         />
       </FadeIn>
       
