@@ -1,16 +1,135 @@
 <!doctype html>
-<html lang="<!-- figma:lang -->">
+<html lang="en">
   <head>
-    <!-- figma:head-start -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><!-- figma:title --></title>
-    <!-- figma:head-end -->
+
+    <!-- Primary Meta Tags -->
+    <title>Herbique - Premium Herbal Wellness Products</title>
+    <meta name="title" content="Herbique - Premium Herbal Wellness Products" />
+    <meta
+      name="description"
+      content="Discover Herbique's range of premium herbal wellness products - crafted from nature's finest ingredients to nurture your body and mind. Shop now and experience the power of herbs."
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://herbique.in/" />
+    <meta property="og:title" content="Herbique - Premium Herbal Wellness Products" />
+    <meta
+      property="og:description"
+      content="Discover Herbique's range of premium herbal wellness products - crafted from nature's finest ingredients to nurture your body and mind."
+    />
+    <meta property="og:image" content="/favicon.png" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://herbique.in/" />
+    <meta name="twitter:title" content="Herbique - Premium Herbal Wellness Products" />
+    <meta
+      name="twitter:description"
+      content="Discover Herbique's range of premium herbal wellness products - crafted from nature's finest ingredients to nurture your body and mind."
+    />
+    <meta name="twitter:image" content="/favicon.png" />
+  
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-95YC1N1Z7N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-95YC1N1Z7N');
+    </script>
+
+    <!-- Structured Data (JSON-LD) for LocalBusiness and Products -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://herbique.in/#organization",
+          "name": "Herbique Natural Soap Co.",
+          "url": "https://herbique.in/",
+          "logo": "https://herbique.in/favicon.png",
+          "image": "https://herbique.in/favicon.png",
+          "telephone": "+918319070306",
+          "email": "herbique.skin@gmail.com",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://herbique.in/#product-glutathione",
+          "name": "Herbique Glutathione Soap",
+          "image": "https://herbique.in/favicon.png",
+          "description": "Premium handcrafted glutathione soap for skin brightening, reducing tanning, pigmentation, and dark spots.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Herbique"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "INR",
+            "lowPrice": "120",
+            "highPrice": "270",
+            "offerCount": "3",
+            "priceRange": "₹120 - ₹270",
+            "availability": "https://schema.org/InStock",
+            "url": "https://herbique.in/#products"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://herbique.in/#product-redvelvet",
+          "name": "Herbique Red Velvet Soap",
+          "image": "https://herbique.in/favicon.png",
+          "description": "Specially crafted soap for open pores. Deeply cleanses and helps minimise the appearance of visible pores.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Herbique"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": "120",
+            "availability": "https://schema.org/InStock",
+            "url": "https://herbique.in/#products"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://herbique.in/#product-neem",
+          "name": "Herbique Neem Soap",
+          "image": "https://herbique.in/favicon.png",
+          "description": "Rooted in Ayurvedic tradition. Neem, Aloe Vera and Tulsi work together to fight acne and soothe skin.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Herbique"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": "120",
+            "availability": "https://schema.org/InStock",
+            "url": "https://herbique.in/#products"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
-    <!-- figma:body-start -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- figma:body-end -->
   </body>
-</html>
+
