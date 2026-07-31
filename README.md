@@ -2,7 +2,7 @@
 
 A premium, interactive product showcase website designed for **HERBIQUE Natural Soap Co.** to present handcrafted botanical soaps, highlight active natural ingredients, allow customers to write reviews, and order seamlessly via WhatsApp.
 
-✨ **Live Preview**: [http://localhost:8443](http://localhost:8443) (Local Server) or your live Vercel website.
+✨ **Live Preview**: [http://localhost:8443](http://localhost:8443) (Local Server) or your live Vercel site.
 
 ---
 
